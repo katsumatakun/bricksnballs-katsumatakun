@@ -1,3 +1,3 @@
 public interface VanishListener  {
-	public void update(VanishEvent e);
+	void update(VanishEvent e);
 }
