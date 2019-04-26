@@ -11,10 +11,10 @@ public class Obstacle implements Runnable{
 
 	public Obstacle(Point center) {
 		this.center = center;
-		size = 50;
+		size = (int) (Math.random() * 50) + 20;
 		region = new Rectangle(center.x-size/2,center.y-size/2, size, size);
 		color = color.RED;
-		hitPoint = 6;
+		hitPoint = (int) (Math.random() * 8) + 3;
 
 		dy = 1;
 	}
