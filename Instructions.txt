@@ -1,0 +1,6 @@
+Your goal is trying to make the enemy's hitpoints zero before your hitpoints gets zero.
+Every time your balls hit an obstacle, both an obstacle hitpoint and enemy's hitpoints decreases by one. Every time obstacles reach the bottom, your hit
+point deceases by the remaining hitpoints of the obstacles. Every time an obstacle disappear either by getting hitpoint zero or reaching the bottom,
+a new obstacle is created,and there are constantly five obstacles falling. Also there is 12% chance that new obstacle becomes blue. If your balls hit
+a blue obstacle, your hitpoint increases by one, but no damage to the enemy, and if it reaches the bottom, you will be
+damaged as in the case of other red obstacles.

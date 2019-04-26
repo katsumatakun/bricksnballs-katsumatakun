@@ -9,11 +9,11 @@ public class Obstacle implements Runnable{
 	private Color color;
 	private int hitPoint;
 
-	public Obstacle(Point center) {
+	public Obstacle(Point center, Color color) {
 		this.center = center;
 		size = (int) (Math.random() * 50) + 20;
 		region = new Rectangle(center.x-size/2,center.y-size/2, size, size);
-		color = color.RED;
+		this.color = color;
 		hitPoint = (int) (Math.random() * 8) + 3;
 
 		dy = 1;
@@ -62,6 +62,9 @@ public class Obstacle implements Runnable{
 	}
 	public int right(){
 		return region.x +region.width;
+	}
+	public Color getColor(){
+		return color;
 	}
 
     @Override

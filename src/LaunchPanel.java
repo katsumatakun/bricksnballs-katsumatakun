@@ -10,8 +10,6 @@ public class LaunchPanel extends JPanel implements VanishListener{
 
 		ArrayList<MovingDot> dots;
 		ArrayList<Obstacle> os;
-		ArrayList<MovingDot> deadDots;
-		ArrayList<Obstacle> deadObstacles;
 		Dot launchPoint;
 		Point s;
 		int enemyPoint;
@@ -22,16 +20,13 @@ public class LaunchPanel extends JPanel implements VanishListener{
 		public LaunchPanel(){
 			setPreferredSize(new Dimension(500,500));
 			dots = new ArrayList<MovingDot>();
-			deadDots = new ArrayList<>();
-			deadObstacles = new ArrayList<>();
 			os = new ArrayList<>();
-			//o = new Obstacle(new Point(150,150));
 			s = new Point(250,450);
 			launchPoint =new Dot(s);
 			launchPoint.setColor(Color.GREEN);
 			addMouseListener(new MousePlay());
-			generateObs(5);
-			enemyPoint = 100;
+			generateObs(5, Color.red);
+			enemyPoint = 400;
 			myPoint  = 100;
 			you = new JLabel("You: " + myPoint);
 			enemy = new JLabel("Enemy: " +  enemyPoint);
@@ -39,12 +34,12 @@ public class LaunchPanel extends JPanel implements VanishListener{
 			add(enemy);
 		}
 
-		private void generateObs(int num){
+		private void generateObs(int num, Color color){
 			boolean intersection = false;
 			for(int i=0; i<num; i++){
 				int x = (int)(Math.random()*300)+100;
 				int y = (int)(Math.random()*300)+50;
-				Obstacle newObs = new Obstacle(new Point(x,y));
+				Obstacle newObs = new Obstacle(new Point(x,y), color);
 				for(Obstacle obstacle: os){
 					if(obstacle.getRegion().intersects(newObs.getRegion())) {
 						System.out.println(obstacle.getRegion());
@@ -118,12 +113,17 @@ public class LaunchPanel extends JPanel implements VanishListener{
 					for (Obstacle o : os) {
 						if (md.getRegion().intersects(o.getRegion())) {
 							o.hitBy(md);
-							enemyPoint--;
+							if(o.getColor().equals(Color.red))
+								enemyPoint--;
+							else
+								myPoint++;
 							enemy.setText("enemy: " + enemyPoint);
+							you.setText("you: " + myPoint);
 							if(enemyPoint <= 0) {
+								dots.clear();
 								JOptionPane.showMessageDialog(null, "You won!!!");
 								System.exit(0);
-							}
+								}
 							}
 						}
 					}
@@ -202,14 +202,16 @@ public class LaunchPanel extends JPanel implements VanishListener{
 				}
 			}
 
-
-
 			@Override
 			public void update(VanishEvent e) {
 			 if (e.getSource() instanceof Obstacle) {
 					Obstacle o = (Obstacle) e.getSource();
 					os.remove(o);
-					generateObs(1);
+					int num = (int)(Math.random()*8)+1;
+					if(num == 2)
+						generateObs(1, Color.blue);
+					else
+						generateObs(1, Color.red);
 				}
 			}
 		}
