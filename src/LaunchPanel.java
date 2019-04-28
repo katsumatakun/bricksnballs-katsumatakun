@@ -42,8 +42,8 @@ public class LaunchPanel extends JPanel implements VanishListener{
 				Obstacle newObs = new Obstacle(new Point(x,y), color);
 				for(Obstacle obstacle: os){
 					if(obstacle.getRegion().intersects(newObs.getRegion())) {
-						System.out.println(obstacle.getRegion());
-						System.out.println(newObs.getRegion());
+						//System.out.println(obstacle.getRegion());
+						//System.out.println(newObs.getRegion());
 						intersection = true;
 					}
 				}
