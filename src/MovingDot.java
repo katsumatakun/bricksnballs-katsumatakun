@@ -2,7 +2,7 @@ import org.w3c.dom.css.Rect;
 
 import java.awt.*;
 
-public class MovingDot extends Dot implements Runnable{
+public class MovingDot extends Dot{
 
 	private Rectangle location;
 	private double dx;
@@ -84,7 +84,4 @@ public class MovingDot extends Dot implements Runnable{
 		this.speed = speed;
 	}
 
-	@Override
-	public void run() {
-	}
 }

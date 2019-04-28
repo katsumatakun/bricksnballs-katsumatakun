@@ -204,7 +204,6 @@ public class LaunchPanel extends JPanel implements VanishListener{
 
 			@Override
 			public void update(VanishEvent e) {
-			 if (e.getSource() instanceof Obstacle) {
 					Obstacle o = (Obstacle) e.getSource();
 					os.remove(o);
 					int num = (int)(Math.random()*8)+1;
@@ -212,6 +211,6 @@ public class LaunchPanel extends JPanel implements VanishListener{
 						generateObs(1, Color.blue);
 					else
 						generateObs(1, Color.red);
-				}
+
 			}
 		}

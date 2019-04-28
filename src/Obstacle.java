@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Obstacle implements Runnable{
+public class Obstacle{
 
 	private double dy;
 	private Point center;
@@ -66,9 +66,4 @@ public class Obstacle implements Runnable{
 	public Color getColor(){
 		return color;
 	}
-
-    @Override
-    public void run() {
-
-    }
 }
