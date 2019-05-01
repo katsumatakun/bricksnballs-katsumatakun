@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Obstacle{
 
@@ -8,6 +9,7 @@ public class Obstacle{
 	private int size;
 	private Color color;
 	private int hitPoint;
+	private ArrayList<VanishListener> vanishListeners;
 
 	public Obstacle(Point center, Color color) {
 		this.center = center;
@@ -15,13 +17,17 @@ public class Obstacle{
 		region = new Rectangle(center.x-size/2,center.y-size/2, size, size);
 		this.color = color;
 		hitPoint = (int) (Math.random() * 8) + 3;
-
 		dy = 1;
+		vanishListeners = new ArrayList<>();
 	}
 
 	public void move(){
 		center.y += dy;
 		region.y = center.y-size/2;
+	}
+
+	public void addVanishListeners(VanishListener vl){
+		vanishListeners.add(vl);
 	}
 
 	public void paint(Graphics g){
@@ -48,6 +54,12 @@ public class Obstacle{
 			}
 		}
 		hitPoint--;
+		if(hitPoint<=0){
+			VanishEvent e = new VanishEvent(this);
+			for(VanishListener vl: vanishListeners){
+				vl.update(e);
+			}
+		}
 	}
 
 	public int getHitPoint(){return hitPoint;}

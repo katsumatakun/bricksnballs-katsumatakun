@@ -52,6 +52,7 @@ public class LaunchPanel extends JPanel implements VanishListener{
 				}
 				else {
 					os.add(newObs);
+					newObs.addVanishListeners(this);
 					Thread obth = new Thread(new obsThread(newObs));
 					obth.start();
 				}
@@ -153,9 +154,9 @@ public class LaunchPanel extends JPanel implements VanishListener{
 			public void run() {
 				while (!finish) {
 					obs.move();
-					if (getHeight() != 0 && (obs.bottom() > getHeight() || obs.getHitPoint() <= 0)) {
-						VanishEvent ev = new VanishEvent(obs);
-						update(ev);
+					if (getHeight() != 0 && (obs.bottom() > getHeight())) {
+						if(os.remove(obs))
+							recreateObs();
 						finish = true;
 						if(obs.bottom() > getHeight()){
 							myPoint -= obs.getHitPoint();
@@ -206,11 +207,15 @@ public class LaunchPanel extends JPanel implements VanishListener{
 			public void update(VanishEvent e) {
 					Obstacle o = (Obstacle) e.getSource();
 					os.remove(o);
-					int num = (int)(Math.random()*8)+1;
-					if(num == 2)
-						generateObs(1, Color.blue);
-					else
-						generateObs(1, Color.red);
+					recreateObs();
 
+			}
+
+			private void recreateObs(){
+				int num = (int)(Math.random()*8)+1;
+				if(num == 2)
+					generateObs(1, Color.blue);
+				else
+					generateObs(1, Color.red);
 			}
 		}
