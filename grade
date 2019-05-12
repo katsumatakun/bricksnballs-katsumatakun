@@ -1,0 +1,13 @@
+25  Threading for Motion/Collision
+
+10	Multiple Obstacles
+5	Display Hit Points
+10	Hit-by Reduction (Handled by Obstacle)
+
+10	Ball Vanishes off-screen
+15	Obstacles vanish when hp == 0
+
+24	Game Play
+    If I win, but don't click on the dialog, I lose.
+
+Total 99/100
